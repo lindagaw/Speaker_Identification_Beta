@@ -1,9 +1,10 @@
 from helper import slice_audios, delete_dir
 from helper import extract_features_for_all_wavs, add_noise_and_deamplify_per_folder
-from models import train_cnn, mil_squared_error, get_optimizer
+#from models import train_cnn, mil_squared_error, get_optimizer
 
 import os
-from tensorflow.keras.utils import to_categorical
+import pretty_errors
+#from tensorflow.keras.utils import to_categorical
 
 path_caregiver = 'singles//1-caregiver//'
 dest_caregiver = 'singles//1-caregiver-sliced//'
@@ -11,7 +12,7 @@ dest_caregiver = 'singles//1-caregiver-sliced//'
 path_patient = 'singles//2-patient//'
 dest_patient = 'singles//2-patient-sliced//'
 
-noise_directory = '..//noise_home//'
+noise_directory = 'noise_home//'
 
 delete_dir(dest_caregiver)
 delete_dir(dest_patient)
@@ -27,10 +28,11 @@ def start_SID_train():
     slice_audios(path_caregiver, dest_caregiver)
     slice_audios(path_patient, dest_patient)
 
-    '''
+
     add_noise_and_deamplify_per_folder(dest_caregiver, '.wav', noise_directory)
     add_noise_and_deamplify_per_folder(dest_patient, '.wav', noise_directory)
 
+    '''
     X_caregiver, y_caregiver = extract_features_for_all_wavs(dest_caregiver, 0)
     X_patient, y_patient = extract_features_for_all_wavs(dest_patient, 1)
 

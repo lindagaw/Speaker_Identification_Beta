@@ -1,5 +1,5 @@
 import os
-
+import shutil
 def delete_dir(dir):
     try:
         shutil.rmtree(dir)

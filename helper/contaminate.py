@@ -47,9 +47,9 @@ def add_noise_and_deamplify_per_folder(directory, extension, noise_directory):
 
 def add_noise_per_file(emotionfile, bgnoise, newSoundFile):
 
-    emotionsound = AudioSegment.from_wav(emotionfile)
+    emotionsound = AudioSegment.from_file(emotionfile, format="wav")
     emotion_duration = emotionsound.duration_seconds * 1000
-    noise = AudioSegment.from_wav(bgnoise)
+    noise = AudioSegment.from_file(bgnoise, format="wav")
     noise_duration = noise.duration_seconds * 1000
 
     threshold = noise_duration - emotion_duration
