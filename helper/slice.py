@@ -36,3 +36,4 @@ def slice_audios(path, dest):
             new_audio_path = dest + filename[:len(filename)-4] + '_' + str(fold) + '.wav'
             print('generated the slice of the audio segment at index ' + str(fold) )
             new_audio.export(new_audio_path, format="wav")
+        break

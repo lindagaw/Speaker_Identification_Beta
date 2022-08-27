@@ -3,8 +3,10 @@ from helper import extract_features_for_all_wavs, add_noise_and_deamplify_per_fo
 #from models import train_cnn, mil_squared_error, get_optimizer
 
 import os
+import numpy as np
 import pretty_errors
-#from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
+from sklearn.model_selection import train_test_split
 
 path_caregiver = 'singles//1-caregiver//'
 dest_caregiver = 'singles//1-caregiver-sliced//'
@@ -32,7 +34,7 @@ def start_SID_train():
     add_noise_and_deamplify_per_folder(dest_caregiver, '.wav', noise_directory)
     add_noise_and_deamplify_per_folder(dest_patient, '.wav', noise_directory)
 
-    '''
+    
     X_caregiver, y_caregiver = extract_features_for_all_wavs(dest_caregiver, 0)
     X_patient, y_patient = extract_features_for_all_wavs(dest_patient, 1)
 
@@ -44,7 +46,7 @@ def start_SID_train():
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.25, random_state=42)
 
     model = train_cnn(X_train, y_train, X_test, y_test, X_val, y_val)
-    '''
+    
 
 if __name__ == "__main__":
     start_SID_train()
