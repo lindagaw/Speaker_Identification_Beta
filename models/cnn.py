@@ -1,11 +1,19 @@
 import tensorflow as tf
 import tensorflow.keras as keras
 
+import numpy as np
+
 from tensorflow.keras.layers import Convolution1D, Dense, MaxPooling1D, Flatten, Add, Dropout
 from tensorflow.keras.utils import to_categorical
 
 from tensorflow.python.client import device_lib
 from tensorflow.python.keras import backend
+from sklearn.metrics import accuracy_score
+
+adam = tf.keras.optimizers.Adam(learning_rate=1e-5)
+
+def mil_squared_error(y_true, y_pred):
+    return tf.keras.backend.square(tf.keras.backend.max(y_pred) - tf.keras.backend.max(y_true))
 
 def train_cnn(X_train, y_train, X_test, y_test, X_val, y_val):
 
@@ -52,5 +60,5 @@ def train_cnn(X_train, y_train, X_test, y_test, X_val, y_val):
     y_trues = [np.argmax(val) for val in y_test]
     print(accuracy_score(y_trues, y_preds))
 
-    model.save('..//models//cnn.hdf5')
+    #model.save('..//models//cnn.hdf5')
     return model

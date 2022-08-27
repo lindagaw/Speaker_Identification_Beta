@@ -1,13 +1,13 @@
 from helper import slice_audios, delete_dir
 from helper import extract_features_for_all_wavs, add_noise_and_deamplify_per_folder
-#from models import train_cnn, mil_squared_error, get_optimizer
+from models import train_cnn, mil_squared_error, get_optimizer
 
 import os
 import numpy as np
 import pretty_errors
 from tensorflow.keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
-
+from sklearn.metrics import accuracy_score
 path_caregiver = 'singles//1-caregiver//'
 dest_caregiver = 'singles//1-caregiver-sliced//'
 
