@@ -1,5 +1,8 @@
 noise_home
 singles
+generated_data
+generated_models
+
 *.wav
 *.hdf5
 *.npy
