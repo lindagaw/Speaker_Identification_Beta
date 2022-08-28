@@ -5,12 +5,14 @@ import shutil
 import scipy.io as sio
 import librosa
 import soundfile as sf
-
+import os
 # Used to record audio streams
 import wave
 import datetime
 import time
-
+import shutil
+from tqdm import tqdm
+import sys
 # Used to process audio data
 import contextlib
 import pyaudio
@@ -28,10 +30,31 @@ CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 16000
-RECORD_SECONDS = 5
+RECORD_SECONDS = 300
 
-# Used to receive a single session of audio input from the microphone
-# Used to produce a less messy formatting for the current time
+speaker = sys.argv[1]
+
+print('recording the voice of the {}. This will take {} seconds...'.format(speaker, RECORD_SECONDS))
+
+def get_directory(speaker):
+
+    if speaker == 'caregiver':
+        dir = "singles//1-caregiver//"
+    elif speaker == 'patient':
+        dir = "singles//2-patient//"
+    else:
+        dir = "singles//0-nonFamily//"
+
+    try:
+        shutil.rmtree(dir)
+    except Exception as e:
+        print(e)
+
+    os.makedirs(dir)
+
+    return dir
+
+
 
 def replace_special_chars(z, special_chars, new_char):
     removeSpecialChars = z.translate({ord(c): new_char for c in special_chars})
@@ -51,13 +74,19 @@ def record_single_session(CHUNK, FORMAT, CHANNELS, RATE, RECORD_SECONDS):
 
     CURRENT_TIME = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
-    WAVE_OUTPUT_FILENAME = replace_special_chars(CURRENT_TIME, ': ', '-') + '.wav'
+    #WAVE_OUTPUT_FILENAME = replace_special_chars(CURRENT_TIME, ': ', '-') + '.wav'
+    WAVE_OUTPUT_FILENAME = speaker + '.wav'
 
     frames = []
 
-    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+    #for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+    #    data = stream.read(CHUNK)
+    #    frames.append(data)
+
+    for i in tqdm (range(int(RATE / CHUNK * RECORD_SECONDS)), desc="Recording..."):
         data = stream.read(CHUNK)
         frames.append(data)
+
 
     # print("Recording finished...")
 
@@ -81,5 +110,5 @@ def record_single_session(CHUNK, FORMAT, CHANNELS, RATE, RECORD_SECONDS):
 
 if __name__ == '__main__':
 
-    raw_audio_dir = 'generated_data//'
+    raw_audio_dir = get_directory(speaker)
     record_single_session(CHUNK, FORMAT, CHANNELS, RATE, RECORD_SECONDS)
