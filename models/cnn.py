@@ -60,5 +60,5 @@ def train_cnn(X_train, y_train, X_test, y_test, X_val, y_val):
     y_trues = [np.argmax(val) for val in y_test]
     print(accuracy_score(y_trues, y_preds))
 
-    #model.save('..//models//cnn.hdf5')
+    model.save('generated_models//generated_models//cnn.hdf5')
     return model
