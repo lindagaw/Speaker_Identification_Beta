@@ -14,10 +14,14 @@ model = keras.models.load_model('generated_models//cnn.hdf5', custom_objects={"m
 
 def identify_speaker(vec, threshold):
     raw_pred = np.squeeze(model.predict(vec))
-
     sid = np.argmax(raw_pred)
 
+    print(raw_pred)
+
     if raw_pred[sid] > threshold:
-        return sid
+        if sid == 0:
+            return 'caregiver'
+        else:
+            return 'patient'
     else:
-        return 9
+        return 'unregistered'
