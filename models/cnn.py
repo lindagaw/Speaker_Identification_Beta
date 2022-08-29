@@ -22,17 +22,14 @@ def train_cnn(X_train, y_train, X_test, y_test, X_val, y_val):
     model.add(MaxPooling1D(2))
     model.add(Dropout(0.2))
 
-    model = keras.Sequential()
     model.add(Convolution1D(filters= 500, kernel_size=2, strides=2, activation='relu'))
     model.add(MaxPooling1D(2))
     model.add(Dropout(0.2))
 
-    model = keras.Sequential()
     model.add(Convolution1D(filters= 500, kernel_size=2, strides=2, activation='relu'))
     model.add(MaxPooling1D(2))
     model.add(Dropout(0.2))
 
-    model = keras.Sequential()
     model.add(Convolution1D(filters= 500, kernel_size=2, strides=2, activation='relu'))
     model.add(MaxPooling1D(2))
     model.add(Dropout(0.2))

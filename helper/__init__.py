@@ -4,3 +4,4 @@ from .contaminate import add_noise_and_deamplify_per_folder
 from .delete import delete_dir
 from .listen import record_single_window
 from .voice_activity_detection import detect_voice_activity
+from .identify import identify_speaker

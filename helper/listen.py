@@ -56,10 +56,10 @@ def record_single_window(CHUNK, FORMAT, CHANNELS, RATE, RECORD_SECONDS, raw_audi
 
     WAVE_OUTPUT_FILENAME = replace_special_chars(CURRENT_TIME, ': ', '-') + '.wav'
 
-    if int(WAVE_OUTPUT_FILENAME[11:13]) < 8 or int(WAVE_OUTPUT_FILENAME[11:13]) > 19:
-        print("time outside preset listening period, not recording " + WAVE_OUTPUT_FILENAME)
-        time.sleep(5.0)
-        return "None"
+    #if int(WAVE_OUTPUT_FILENAME[11:13]) < 8 or int(WAVE_OUTPUT_FILENAME[11:13]) > 19:
+    #    print("time outside preset listening period, not recording " + WAVE_OUTPUT_FILENAME)
+    #    time.sleep(5.0)
+    #    return "None"
 
     frames = []
 

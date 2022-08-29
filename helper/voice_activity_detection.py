@@ -27,9 +27,9 @@ def detect_voice_activity(wav_path):
 
     try:
         transcription = func_timeout(5.5, r.recognize_google, args=[audio])
-        print('{} is transcribed as {}.'.format(wav_path, transcription))
+        #print('{} is transcribed as {}.'.format(wav_path, transcription))
         return True
     except Exception as e:
-        print('{} is not speech.'.format(wav_path))
+        #print('{} is not speech.'.format(wav_path))
         os.remove(wav_path)
         return False
